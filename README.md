@@ -4,3 +4,7 @@
 Программа или сценарий: "C:\Program Files\Python313\pythonw.exe"
 Добавить аргументы: bing_wallpaper.pyw
 Рабочая папка: D:\Scripts
+
+# Synology
+
+В Synology необходимо добавить в планировщик задач, запуск скрипта от пользователя root.
