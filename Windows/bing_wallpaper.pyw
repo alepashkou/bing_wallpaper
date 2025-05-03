@@ -4,8 +4,9 @@ import ctypes
 from datetime import datetime, timedelta
 import glob
 
-DAYS_TO_KEEP = 60  # Хранение изображений в течение 30 дней
+DAYS_TO_KEEP = 60  # Хранение изображений в течение 60 дней
 
+# Очистка старых изображений
 def clean_old_wallpapers(dir_path):
     try:
         # Рассчитываем пороговую дату
@@ -34,7 +35,8 @@ def clean_old_wallpapers(dir_path):
     except Exception as e:
         print(f"Cleanup error: {str(e)}")
         return False
-    
+
+# Формируем ссылку на изображение    
 def get_bing_wallpaper_url():
     try:
         api_url = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US"
@@ -56,6 +58,7 @@ def get_bing_wallpaper_url():
     except Exception as e:
         raise Exception(f"Error getting Bing URL: {str(e)}")
 
+# Скачиваем изображение в темп
 def download_wallpaper(url, save_path):
     try:
         response = requests.get(url, stream=True)
@@ -68,6 +71,7 @@ def download_wallpaper(url, save_path):
     except Exception as e:
         raise Exception(f"Download failed: {str(e)}")
 
+# Устанавливаем изображение
 def set_as_wallpaper(image_path):
     try:
         if not os.path.exists(image_path):
@@ -82,8 +86,9 @@ def set_as_wallpaper(image_path):
         return True
     except Exception as e:
         raise Exception(f"Set wallpaper failed: {str(e)}")
-
-def main_loop():
+    
+# Главная функция
+def main():
     temp_dir = os.path.join(os.environ['TEMP'], 'BingWallpapers')
     os.makedirs(temp_dir, exist_ok=True)
     
@@ -109,7 +114,6 @@ def main_loop():
         
     except Exception as e:
         print(f"Error: {str(e)}\n")
-        
 
-if __name__ == "__main__":
-    main_loop()
+# Запуск
+main()
